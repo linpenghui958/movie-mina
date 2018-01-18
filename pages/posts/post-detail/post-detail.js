@@ -8,7 +8,9 @@ Page({
   onLoad: function (option) {
     var globalData = app.globalData;
     var postId = option.id;
-    this.data.currentPostId = postId
+    this.setData({
+      currentPostId: postId
+    })
     var postData = postsData.postList[postId];
     this.setData({
       postData: postData
@@ -44,6 +46,13 @@ Page({
       app.globalData.g_currentMusicPostId = that.data.currentPostId;
     })
     wx.onBackgroundAudioPause(function () {
+      that.setData({
+        isPlayingMusic: false
+      });
+      app.globalData.g_isPlayingMusic = false;
+      app.globalData.g_currentMusicPostId = null;
+    })
+    wx.stopBackgroundAudio(function () {
       that.setData({
         isPlayingMusic: false
       });

@@ -1,13 +1,23 @@
 <import src="./movie-list/movie-list-template.wxml" />
+<import src="./movie-grid/movie-grid-template.wxml" />
+<view class="search">
+  <icon type="search" size="13" color="#405f80" class="search-img"></icon>
+  <input type="text" placeholder="李兰是个大智障" placeholder-class="placeholder" bindfocus="onBindFocus" bindconfirm="onBindChange" bindblur="onBindBlur"></input>
+  <image wx:if="{{searchPanelShow}}" src="/images/icon/xx.png" class="xx-img" bindtap="onCancelTap"></image>
+</view>
 
-<view class="container">
+<view class="container" wx:if="{{containerShow}}">
   <view class="movie-template">
-    <template is="movieListTemplate" />
+    <template is="movieListTemplate" data="{{...inTheaters}}"/>
   </view>
   <view class="movie-template">
-    <template is="movieListTemplate" />
+    <template is="movieListTemplate" data="{{...comingSoon}}" />
   </view>
   <view class="movie-template">
-    <template is="movieListTemplate" />
+    <template is="movieListTemplate" data="{{...top250}}"/>
   </view>
+</view>
+
+<view class="search-panel" wx:if="{{searchPanelShow}}">
+    <template is="movieGridTemplate" data="{{...searchResult}}"/>
 </view>
